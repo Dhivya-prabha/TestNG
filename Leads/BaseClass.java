@@ -23,10 +23,17 @@ public class BaseClass {
 	@Parameters({"url","uname", "password"})
 	@BeforeMethod
 	public void RunLogin(String url, String uname, String password) throws InterruptedException {
+		ChromeOptions options  = new ChromeOptions();
+		options.addArguments("--disable-save-password-bubble");
+		options.addArguments("--disable-notifications");
+		options.addArguments("--disable-popup-blocking");
+		//options.setAcceptInsecureCerts(true);
+		// Use a temporary profile (no saved passwords, no cache)
+		options.addArguments("--guest");
+
+		driver = new ChromeDriver(options);
 		
-		driver = new ChromeDriver();
-		ChromeOptions options = new ChromeOptions();
-		options.setAcceptInsecureCerts(true);
+		
 				
 		driver.get(url);
 		driver.manage().window().maximize();		
