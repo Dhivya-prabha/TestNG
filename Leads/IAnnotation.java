@@ -1,20 +1,23 @@
 package Leads;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-
 import org.testng.IAnnotationTransformer;
-import org.testng.annotations.ITestAnnotation;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 
-public class IAnnotation implements IAnnotationTransformer{
+public class RetryFailedTest implements IRetryAnalyzer{
+	private static final int max = 2;
+	private int retryCount = 0;
 	
-
-	public void transform(ITestAnnotation annotation, 
-			Class testClass,
-			Constructor testConstructor, 
-			Method testMethod) {
-		// TODO Auto-generated method stub
-		annotation.setRetryAnalyzer(Retry.class);
+	
+	public boolean retry(ITestResult result) {
+		if(retryCount < max) {
+			retryCount++;
+			System.out.println("Max Count: " + retryCount);
+			return true;
+		}
+		
+		return false;
 	}
+	
 
 }
