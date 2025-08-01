@@ -21,7 +21,7 @@ public class CreateLead extends BaseClass {
 	//-> @AfterMethod -> close browser
 
 	// @Test(groups = "smoke", dependsOnGroups = "sanity", retryAnalyzer = RetryFailedTest.class)
-	@Test(dataProvider = "fetchData", timeOut = 2100, retryAnalyzer = Retry.class)
+	@Test(dataProvider = "fetchData", timeOut = 2100, retryAnalyzer = RetryFailedTest.class)
 	public void runCreateLeads(String cName, String fName, String lName) throws InterruptedException {
 		// ChromeDriver driver = new ChromeDriver();
 		Assert.assertEquals(true, false);
